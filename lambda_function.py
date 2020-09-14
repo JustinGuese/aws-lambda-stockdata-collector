@@ -92,5 +92,5 @@ def lambda_handler(event, context):
     do_stock_update()
     return {
         'statusCode': 200,
-        'body': json.dumps('Hello from Lambda!')
+        'body': json.dumps('Success!')
     }
