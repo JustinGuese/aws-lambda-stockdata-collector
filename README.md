@@ -8,7 +8,7 @@ Yahoo finance minute data download is limited to 7 days, that is why I want to c
 # Installation
 
 - Upload the zip file to lambda layers which includes pandas, yfinance, numpy and boto3, which are libraries needed to download data
-- upload the .py files to the editor/lambda_function.py
+- Copy contents of lambda_function.py to lambda console with the same name
 - give s3 access to your target bucket via lambda iam policies
 - set environment variables
   - BUCKET : name of bucket that files should be retrieved and copied to
