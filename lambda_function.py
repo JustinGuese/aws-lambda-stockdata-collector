@@ -51,8 +51,9 @@ def do_stock_update():
     old_dfs = dict()
     for stock in stocks:
     	try:
-    		filename = "%s.csv.gz"%(stock)
-    		download_file(bucketname,filename,filename)
+    		filenamelocal = "/tmp/%s.csv.gz"%(stock)
+    		filenameremote = "%s.csv.gz"%(stock)
+    		download_file(bucketname,filenamelocal,filenameremote)
     		data = pd.read_csv(filename,compression="gzip")
     		old_dfs.update({stock:data})
     	except ClientError as e:
@@ -67,7 +68,8 @@ def do_stock_update():
     #print(data.head())
     
     for stock in stocks:
-    	filename = "%s.csv.gz"%(stock)
+    	filename = "/tmp/%s.csv.gz"%(stock)
+    	filenameremote = "%s.csv.gz"%(stock)
     	# stack old and new data together
     	new = data[stock]
     	old = old_dfs.get(stock)
@@ -81,7 +83,7 @@ def do_stock_update():
     	df = df[~df.index.duplicated(keep="first")]
     	print(df.shape)
     	df.to_csv(filename,compression="gzip",index=False)
-    	upload_file(filename,bucketname)
+    	upload_file(filename,bucketname,filenameremote)
 
 
 
@@ -93,3 +95,4 @@ def lambda_handler(event, context):
         'statusCode': 200,
         'body': json.dumps('Success!')
     }
+
