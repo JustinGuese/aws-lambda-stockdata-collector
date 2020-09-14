@@ -3,7 +3,6 @@ import yfinance as yf
 import numpy as np
 import pandas as pd
 import os
-from s3helper import *
 from botocore.exceptions import ClientError
 import boto3
 
